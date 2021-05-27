@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/nikolamilanovicS1318/RISO/tree/master/API_Request'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                sh '''
+                    docker build --tag API_Image:latest .
+                '''
+            }
+        }
+        
+        stage('Stop') {
+            steps {
+                sh '''
+                    docker container stop apiRequest
+                    docker container rm apiRequest
+                '''
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                sh '''
+                    docker run --name api API_Image:latest
+                '''
+            }
+        }
+        
+    }
+}

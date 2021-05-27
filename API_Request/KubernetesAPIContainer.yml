@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Job
+metadata:
+  labels:
+    app: APIApp
+    type: API
+  spec:
+    containers:
+      - name: apiRequest
+      image: API_Image:latest
+      command: ['python', 'CreatePantryBasket.py']
+      restartPolicy: OnFailure

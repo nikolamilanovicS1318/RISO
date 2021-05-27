@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Job
+metadata:
+  labels:
+    app: NginxApp
+    type: WebServer
+  spec:
+    containers:
+      - name: nginx_server
+      image: nginx_server:latest
+      restartPolicy: OnFailure
